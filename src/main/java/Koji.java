@@ -1,16 +1,10 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Koji {
+    private static ArrayList<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        String[] list = new String[100];
-        int count = 0;
 
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Koji");
@@ -26,23 +20,87 @@ public class Koji {
                 System.out.println("____________________________________________________________");
                 break;
             } else if (input.equals("list")) {
-                System.out.println("____________________________________________________________");
-                if (count == 0) {
-                    System.out.println("");
-                } else {
-                    for (int i = 0; i < count; i++) {
-                        System.out.println((i + 1) + ". " + list[i]);
-                    }
-                }
-                System.out.println("____________________________________________________________");
+                listTasks();
+            } else if (input.startsWith("mark ")) {
+                updateTaskStatus(input, true);
+            } else if (input.startsWith("unmark ")) {
+                updateTaskStatus(input, false);
             } else {
-                list[count] = input;
-                count++;
-                System.out.println("____________________________________________________________");
-                System.out.println(" added: " + input);
-                System.out.println("____________________________________________________________");
+                addTask(input);
             }
         }
         sc.close();
+    }
+
+    private static void addTask(String description) {
+        Task task = new Task(description);
+        tasks.add(task);
+        System.out.println("____________________________________________________________");
+        System.out.println(" added: " + description);
+        System.out.println("____________________________________________________________");
+    }
+
+    private static void listTasks() {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the tasks in your list:");
+        if (tasks.isEmpty()) {
+            System.out.println("");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(" " + (i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+        System.out.println("____________________________________________________________");
+    }
+
+    private static void updateTaskStatus(String input, boolean markAsDone) {
+        try {
+            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+            if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                throw new NumberFormatException();
+            }
+            if (markAsDone) {
+                tasks.get(taskIndex).markAsDone();
+            } else {
+                tasks.get(taskIndex).markAsNotDone();
+            }
+            System.out.println("____________________________________________________________");
+            System.out.println(markAsDone
+                    ? " Nice! I've marked this task as done:"
+                    : " OK, I've marked this task as not done yet:");
+            System.out.println("   " + tasks.get(taskIndex));
+            System.out.println("____________________________________________________________");
+        } catch (Exception e) {
+            System.out.println("____________________________________________________________");
+            System.out.println(" Invalid task number. Please enter a valid task index.");
+            System.out.println("____________________________________________________________");
+        }
+    }
+}
+
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public void markAsNotDone() {
+        isDone = false;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
