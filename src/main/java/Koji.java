@@ -173,6 +173,8 @@ public class Koji {
                     addEvent(input, tasks);
                 } else if (input.equals("list")) {
                     tasks.printTasks();
+                } else if (input.startsWith("delete")) {
+                    deleteTask(input, tasks);
                 } else {
                     throw new KojiException(" ? what saying");
                 }
@@ -228,6 +230,22 @@ public class Koji {
         System.out.println("   " + tasks.getLastTask());
         System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
         System.out.println("____________________________________________________________");
+    }
+
+    private static void deleteTask(String input, TaskList tasks) throws KojiException {
+        String[] parts = input.split(" ");
+
+        try {
+            int index = Integer.parseInt(parts[1]) - 1;
+            Task removedTask = tasks.delete(index);
+            System.out.println("____________________________________________________________");
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + removedTask);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("____________________________________________________________");
+        } catch (NumberFormatException e) {
+            throw new KojiException("OOPS!!! Task number must be an integer.");
+        }
     }
 }
 
