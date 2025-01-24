@@ -25,18 +25,27 @@ public class Koji {
                 updateTaskStatus(input, true);
             } else if (input.startsWith("unmark ")) {
                 updateTaskStatus(input, false);
+            } else if (input.startsWith("todo ")) {
+                addTask(new Todo(input.substring(5)));
+            } else if (input.startsWith("deadline ")) {
+                String[] parts = input.substring(9).split(" /by ", 2);
+                addTask(new Deadline(parts[0], parts[1]));
             } else {
-                addTask(input);
+                String[] parts = input.substring(6).split(" /from ", 2);
+                String[] times = parts[1].split(" /to ", 2);
+                addTask(new Event(parts[0], times[0], times[1]));
+
             }
         }
         sc.close();
     }
 
-    private static void addTask(String description) {
-        Task task = new Task(description);
+    private static void addTask(Task task) {
         tasks.add(task);
         System.out.println("____________________________________________________________");
-        System.out.println(" added: " + description);
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
@@ -54,11 +63,7 @@ public class Koji {
     }
 
     private static void updateTaskStatus(String input, boolean markAsDone) {
-        try {
             int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                throw new NumberFormatException();
-            }
             if (markAsDone) {
                 tasks.get(taskIndex).markAsDone();
             } else {
@@ -70,15 +75,11 @@ public class Koji {
                     : " OK, I've marked this task as not done yet:");
             System.out.println("   " + tasks.get(taskIndex));
             System.out.println("____________________________________________________________");
-        } catch (Exception e) {
-            System.out.println("____________________________________________________________");
-            System.out.println(" Invalid task number. Please enter a valid task index.");
-            System.out.println("____________________________________________________________");
-        }
+
     }
 }
 
-class Task {
+abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -102,5 +103,47 @@ class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+}
+
+class Deadline extends Task {
+
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Todo extends Task {
+    public Todo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Event extends Task {
+    protected String from;
+    protected String to;
+
+    public Event(String description, String from, String to) {
+        super(description);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 }
