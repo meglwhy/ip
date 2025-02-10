@@ -23,7 +23,7 @@ public class Koji {
                 String input = sc.nextLine();
                 if (input.equals("bye")) {
                     System.out.println("____________________________________________________________");
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println(" Bye. Hope to see you again soon!");
                     System.out.println("____________________________________________________________");
                     break;
                 } else if (input.startsWith("todo")) {
@@ -63,11 +63,11 @@ public class Koji {
 
     private static void addDeadline(String input, TaskList tasks) throws IOException {
         if (!input.contains("/by")) {
-            throw new IOException(" what deadline bro");
+            throw new IOException(" deadline by...?");
         }
         String[] parts = input.substring(9).split(" /by ", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty()) {
-            throw new IOException(" when deadline??");
+            throw new IOException(" Deadline format should be deadline <desc> /by yyyy-MM-dd HHmm");
         }
         tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
         System.out.println("____________________________________________________________");
@@ -79,11 +79,11 @@ public class Koji {
 
     private static void addEvent(String input, TaskList tasks) throws IOException {
         if (!input.contains("/from") || !input.contains("/to")) {
-            throw new IOException(" what event u doin");
+            throw new IOException(" event from... to... ?");
         }
         String[] parts = input.substring(6).split(" /from | /to ", 3);
         if (parts.length < 3 || parts[0].trim().isEmpty()) {
-            throw new IOException(" when event??");
+            throw new IOException(" Event format should be event <desc> /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm");
         }
         tasks.add(new Event(parts[0].trim(), parts[1].trim(), parts[2].trim()));
         System.out.println("____________________________________________________________");
@@ -105,9 +105,7 @@ public class Koji {
             System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
             System.out.println("____________________________________________________________");
         } catch (NumberFormatException e) {
-            throw new IOException("Task number must be an integer!!");
+            throw new IOException(" Task number must be an integer!!");
         }
     }
 }
-
-

@@ -72,9 +72,12 @@ public class Storage {
                 case "T":
                     return new Todo(description, isDone);
                 case "D":
-                    return new Deadline(description, parts[3], isDone);
+                    return new Deadline(description, Task.parseDate(parts[3]).format(Task.INPUT_FORMAT), isDone);
                 case "E":
-                    return new Event(description, parts[3], parts[4], isDone);
+                    return new Event(description,
+                            Task.parseDate(parts[3]).format(Task.INPUT_FORMAT),
+                            Task.parseDate(parts[4]).format(Task.INPUT_FORMAT),
+                            isDone);
                 default:
                     return null;
             }
