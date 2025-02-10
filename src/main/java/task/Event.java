@@ -1,13 +1,16 @@
 package task;
 
+import java.time.LocalDateTime;
+
+
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
     public Event(String description, String from, String to, boolean isDone) {
         super(description, isDone);
-        this.from = from;
-        this.to = to;
+        this.from = parseDate(from);
+        this.to = parseDate(to);
     }
 
     public Event(String description, String from, String to) {
