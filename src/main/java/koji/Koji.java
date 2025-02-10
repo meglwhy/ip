@@ -1,21 +1,25 @@
 package koji;
 
+import storage.Storage;
 import task.Task;
-import task.TaskList;
-import task.Event;
+import task.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Koji {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
-        System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm koji.Koji");
-        System.out.println(" What can I do for you?");
-        System.out.println("____________________________________________________________");
-        while (true) {
-            try {
+        Storage storage = new Storage("./data/koji.txt");
+
+        try {
+            TaskList tasks = new TaskList(storage);
+            System.out.println("____________________________________________________________");
+            System.out.println(" Hello! I'm Koji.");
+            System.out.println(" What can I do for you?");
+            System.out.println("____________________________________________________________");
+
+            while (true) {
                 String input = sc.nextLine();
                 if (input.equals("bye")) {
                     System.out.println("____________________________________________________________");
@@ -33,23 +37,23 @@ public class Koji {
                 } else if (input.startsWith("delete")) {
                     deleteTask(input, tasks);
                 } else {
-                    throw new KojiException(" ? what saying");
+                    throw new IOException(" ? what saying");
                 }
-            } catch (KojiException e) {
-                System.out.println("____________________________________________________________");
-                System.out.println(e.getMessage());
-                System.out.println("____________________________________________________________");
             }
+        } catch (IOException e) {
+            System.out.println("____________________________________________________________");
+            System.out.println(e.getMessage());
+            System.out.println("____________________________________________________________");
         }
 
         sc.close();
     }
 
-    private static void addTodo(String input, TaskList tasks) throws KojiException {
+    private static void addTodo(String input, TaskList tasks) throws IOException {
         if (input.trim().equals("todo")) {
-            throw new KojiException(" todo WHAT?");
+            throw new IOException(" todo WHAT?");
         }
-        tasks.add(new Todo(input.substring(5).trim()));
+        tasks.add(new Todo(input.substring(5).trim(), false));
         System.out.println("____________________________________________________________");
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + tasks.getLastTask());
@@ -57,13 +61,13 @@ public class Koji {
         System.out.println("____________________________________________________________");
     }
 
-    private static void addDeadline(String input, TaskList tasks) throws KojiException {
+    private static void addDeadline(String input, TaskList tasks) throws IOException {
         if (!input.contains("/by")) {
-            throw new KojiException(" what deadline bro");
+            throw new IOException(" what deadline bro");
         }
         String[] parts = input.substring(9).split(" /by ", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty()) {
-            throw new KojiException(" when deadline??");
+            throw new IOException(" when deadline??");
         }
         tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
         System.out.println("____________________________________________________________");
@@ -73,13 +77,13 @@ public class Koji {
         System.out.println("____________________________________________________________");
     }
 
-    private static void addEvent(String input, TaskList tasks) throws KojiException {
+    private static void addEvent(String input, TaskList tasks) throws IOException {
         if (!input.contains("/from") || !input.contains("/to")) {
-            throw new KojiException(" what event u doin");
+            throw new IOException(" what event u doin");
         }
         String[] parts = input.substring(6).split(" /from | /to ", 3);
         if (parts.length < 3 || parts[0].trim().isEmpty()) {
-            throw new KojiException(" when event??");
+            throw new IOException(" when event??");
         }
         tasks.add(new Event(parts[0].trim(), parts[1].trim(), parts[2].trim()));
         System.out.println("____________________________________________________________");
@@ -89,19 +93,19 @@ public class Koji {
         System.out.println("____________________________________________________________");
     }
 
-    private static void deleteTask(String input, TaskList tasks) throws KojiException {
+    private static void deleteTask(String input, TaskList tasks) throws IOException {
         String[] parts = input.split(" ");
 
         try {
             int index = Integer.parseInt(parts[1]) - 1;
             Task removedTask = tasks.delete(index);
             System.out.println("____________________________________________________________");
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + removedTask);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println(" Noted. I've removed this task:");
+            System.out.println("   " + removedTask);
+            System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
             System.out.println("____________________________________________________________");
         } catch (NumberFormatException e) {
-            throw new KojiException("OOPS!!! task.Task number must be an integer.");
+            throw new IOException("Task number must be an integer!!");
         }
     }
 }

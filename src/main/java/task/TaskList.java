@@ -1,16 +1,22 @@
 package task;
 
+import storage.Storage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private Storage storage;
 
-    public TaskList() {
-        tasks = new ArrayList<>();
+    public TaskList(Storage storage) throws IOException {
+        this.storage = storage;
+        this.tasks = storage.load();
     }
 
-    public void add(Task task) {
+    public void add(Task task) throws IOException {
         tasks.add(task);
+        storage.save(tasks);
     }
 
     public int size() {
@@ -30,7 +36,9 @@ public class TaskList {
         System.out.println("____________________________________________________________");
     }
 
-    public Task delete(int index) throws KojiException {
-        return tasks.remove(index);
+    public Task delete(int index) throws IOException {
+        Task removed = tasks.remove(index);
+        storage.save(tasks);
+        return removed;
     }
 }
