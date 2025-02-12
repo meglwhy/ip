@@ -1,0 +1,45 @@
+import commands.Command;
+import parser.Parser;
+import storage.Storage;
+import task.*;
+import ui.Ui;
+
+import java.io.IOException;
+
+public class Koji {
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+
+    public Koji(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage);
+        } catch (IOException e) {
+            ui.printError("Error loading tasks.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void run() {
+        ui.printWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (IOException e) {
+                ui.printError(e.getMessage());
+            } finally {
+                ui.printLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Koji("./data/koji.txt").run();
+    }
+}
