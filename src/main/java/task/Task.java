@@ -32,7 +32,6 @@ public abstract class Task {
         try {
             return LocalDateTime.parse(date, INPUT_FORMAT);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format :( - Try using yyyy-MM-dd HHmm.");
             return null;
         }
     }

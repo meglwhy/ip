@@ -9,6 +9,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = parseDate(by);
+        if (this.by == null) {
+            throw new IllegalArgumentException(" Invalid deadline");
+        }
     }
 
     // calls new Deadline with isDone == false

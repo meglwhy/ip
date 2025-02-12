@@ -1,0 +1,34 @@
+package commands;
+
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
+import java.io.IOException;
+
+public class DeleteCommand extends Command {
+    private final int taskIndex;
+
+    public DeleteCommand(String input) throws IOException {
+        String[] parts = input.split(" ");
+        if (parts.length < 2) {
+            throw new IOException(" Delete what?? Task number required.");
+        }
+        try {
+            this.taskIndex = Integer.parseInt(parts[1]) - 1; // Convert 1-based index to 0-based
+        } catch (NumberFormatException e) {
+            throw new IOException(" Task number must be an integer!!");
+        }
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IOException(" Task number out of range..");
+        }
+        Task removedTask = tasks.delete(taskIndex);
+        ui.printMessage(" Noted. I've removed this task:\n   " + removedTask +
+                "\n Now you have " + tasks.size() + " tasks in the list.");
+    }
+}

@@ -11,6 +11,10 @@ public class Event extends Task {
         super(description, isDone);
         this.from = parseDate(from);
         this.to = parseDate(to);
+
+        if (this.to == null || this.from == null) {
+            throw new IllegalArgumentException(" Invalid date format.");
+        }
     }
 
     public Event(String description, String from, String to) {
@@ -19,11 +23,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from.format(OUTPUT_FORMAT) + " | " + to.format(OUTPUT_FORMAT);
     }
 }
