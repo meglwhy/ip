@@ -3,7 +3,16 @@ package parser;
 import commands.*;
 import java.io.IOException;
 
+/**
+ * Parses user input and returns the corresponding Command object.
+ */
 public class Parser {
+    /**
+     * Parses the user input and returns a Command object.
+     * @param input The user input.
+     * @return The corresponding Command object.
+     * @throws IOException If an unknown command is encountered.
+     */
     public static Command parse(String input) throws IOException {
         if (input.equals("bye")) {
             return new ExitCommand();

@@ -9,14 +9,24 @@ import java.io.*;
 
 import java.util.ArrayList;
 
+/**
+ * Handles loading and saving tasks to a file.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Creates a Storage object and ensures the file exists.
+     * @param filePath The path to the storage file.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         verifyFileExistence();
     }
 
+    /**
+     * Ensures that the file and its parent directories exist.
+     */
     private void verifyFileExistence() {
         try {
             if (!file.exists()) {
@@ -28,6 +38,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the file.
+     * @return A list of tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -46,10 +60,13 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-
         return tasks;
     }
 
+    /**
+     * Saves the current task list to the file.
+     * @param tasks The list of tasks to save.
+     */
     public void save(ArrayList<Task> tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Task task : tasks) {
@@ -61,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a task from a formatted string.
+     * @param line The line from the storage file.
+     * @return A Task object or null if parsing fails.
+     */
     private Task parseTask(String line) {
         try {
             String[] parts = line.split(" \\| ");

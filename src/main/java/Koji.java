@@ -6,11 +6,19 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The main entry point of the Koji chatbot application.
+ * Handles initializing the chatbot and processing user commands.
+ */
 public class Koji {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initializes Koji with storage, task list, and UI components.
+     * @param filePath Path to the storage file.
+     */
     public Koji(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +30,9 @@ public class Koji {
         }
     }
 
+    /**
+     * Runs the chatbot, continuously processing user input until exit.
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
@@ -39,6 +50,10 @@ public class Koji {
         }
     }
 
+    /**
+     * Main method that starts Koji.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new Koji("./data/koji.txt").run();
     }

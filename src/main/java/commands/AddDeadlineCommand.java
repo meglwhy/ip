@@ -7,10 +7,18 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to add a Deadline task.
+ */
 public class AddDeadlineCommand extends Command {
     private final String description;
     private final String by;
 
+    /**
+     * Constructs an AddDeadlineCommand.
+     * @param input The full user input containing the deadline description and date.
+     * @throws IOException If the format is incorrect.
+     */
     public AddDeadlineCommand(String input) throws IOException {
         if (!input.contains("/by ")) {
             throw new IOException(" Deadline format: deadline <desc> /by yyyy-MM-dd HHmm");

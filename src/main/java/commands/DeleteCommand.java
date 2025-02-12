@@ -7,9 +7,17 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
 
+    /**
+     * Constructs a DeleteCommand.
+     * @param input The full user input containing the task number to delete.
+     * @throws IOException If the task number is invalid.
+     */
     public DeleteCommand(String input) throws IOException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {

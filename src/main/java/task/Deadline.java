@@ -2,10 +2,19 @@ package task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task that needs to be completed before a specific deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-    // load from file
+    /**
+     * Constructs a Deadline task.
+     * @param description The task description.
+     * @param by The deadline date in yyyy-MM-dd HHmm format.
+     * @param isDone Whether the task is already completed.
+     * @throws IllegalArgumentException If the deadline date format is invalid.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = parseDate(by);
@@ -14,9 +23,12 @@ public class Deadline extends Task {
         }
     }
 
-    // calls new Deadline with isDone == false
-    public Deadline(String description, String by) {
-        this(description, by, false);
+    /**
+     * Constructs a new Deadline task that is initially not completed.
+     * @param description The task description.
+     * @param by The deadline date in yyyy-MM-dd HHmm format.
+     */    public Deadline(String description, String by) {
+        this(description, by, false); // calls new Deadline with isDone = false
     }
 
     @Override

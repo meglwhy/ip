@@ -1,6 +1,5 @@
 package commands;
 
-import commands.Command;
 import storage.Storage;
 import task.TaskList;
 import task.Todo;
@@ -8,9 +7,16 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to add a Todo task.
+ */
 public class AddTodoCommand extends Command {
     private final String description;
 
+    /**
+     * Constructs an AddTodoCommand.
+     * @param input The full user input containing the todo description.
+     */
     public AddTodoCommand(String input) {
         this.description = input.replaceFirst("todo ", "").trim();
     }
