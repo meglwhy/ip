@@ -39,7 +39,9 @@ public class Koji {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+
                 Command c = Parser.parse(fullCommand);
+
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (IOException e) {

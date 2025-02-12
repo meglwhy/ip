@@ -73,4 +73,19 @@ public class TaskList {
         storage.save(tasks);
         return removed;
     }
+
+    /**
+     * Searches for tasks that contain the given keyword in their description.
+     * @param keyword The keyword to search for.
+     * @return A list of tasks that contain the keyword.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }
