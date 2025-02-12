@@ -47,7 +47,7 @@ public abstract class Task {
 
     /**
      * Parses a date string into a LocalDateTime object.
-     * @param dateString The date string in yyyy-MM-dd HHmm format.
+     * @param date The date string in yyyy-MM-dd HHmm format.
      * @return A LocalDateTime object or null if parsing fails.
      */
     public static LocalDateTime parseDate(String date) {

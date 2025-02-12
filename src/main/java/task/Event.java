@@ -3,26 +3,26 @@ package task;
 import java.time.LocalDateTime;
 
 /**
- * Represents an event with a start and end date.
+ * Represents an event with a start and end time.
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
     /**
      * Constructs an Event task.
      * @param description The event description.
-     * @param from The event start time in yyyy-MM-dd HHmm format.
-     * @param to The event end time in yyyy-MM-dd HHmm format.
+     * @param startTime The event start time in yyyy-MM-dd HHmm format.
+     * @param endTime The event end time in yyyy-MM-dd HHmm format.
      * @param isDone Whether the event has already happened.
      * @throws IllegalArgumentException If the date format is invalid.
      */
-    public Event(String description, String from, String to, boolean isDone) {
+    public Event(String description, String startTime, String endTime, boolean isDone) {
         super(description, isDone);
-        this.from = parseDate(from);
-        this.to = parseDate(to);
+        this.startTime = parseDate(startTime);
+        this.endTime = parseDate(endTime);
 
-        if (this.to == null || this.from == null) {
+        if (this.endTime == null || this.startTime == null) {
             throw new IllegalArgumentException(" Invalid date format.");
         }
     }
@@ -30,20 +30,20 @@ public class Event extends Task {
     /**
      * Constructs an Event task that is initially not completed.
      * @param description The event description.
-     * @param from The event start time in yyyy-MM-dd HHmm format.
-     * @param to The event end time in yyyy-MM-dd HHmm format.
+     * @param startTime The event start time in yyyy-MM-dd HHmm format.
+     * @param endTime The event end time in yyyy-MM-dd HHmm format.
      */
-    public Event(String description, String from, String to) {
-        this(description, from, to, false);
+    public Event(String description, String startTime, String endTime) {
+        this(description, startTime, endTime, false);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + super.toString() + " (from: " + startTime.format(OUTPUT_FORMAT) + " to: " + endTime.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from.format(INPUT_FORMAT) + " | " + to.format(INPUT_FORMAT);
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + startTime.format(INPUT_FORMAT) + " | " + endTime.format(INPUT_FORMAT);
     }
 }
