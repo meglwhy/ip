@@ -60,6 +60,13 @@ public class Ui {
      * @return The user's input as a string.
      */
     public String readCommand() {
-        return sc.nextLine();
-    }
-}
+        System.out.println("DEBUG: Waiting for user input...");
+        if (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            System.out.println("DEBUG: User entered -> " + input);
+            return input;
+        } else {
+            System.out.println("DEBUG: No input available. Exiting.");
+            return "bye";
+        }
+    }}
