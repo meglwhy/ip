@@ -3,12 +3,18 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 //checkstyle {
 //    toolVersion = '10.2'
 //    config = resources.text.fromFile('config/checkstyle/checkstyle.xml')
 //}
+
+javafx {
+    version = "17.0.14"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
+}
 
 repositories {
     mavenCentral()
@@ -50,7 +56,7 @@ test {
 }
 
 application {
-    mainClass.set("Koji")
+    mainClass.set("gui.Launcher")
 }
 
 shadowJar {
