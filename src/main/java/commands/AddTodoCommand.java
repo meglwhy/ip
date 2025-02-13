@@ -1,11 +1,11 @@
 package commands;
 
+import java.io.IOException;
+
 import storage.Storage;
 import task.TaskList;
 import task.Todo;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to add a Todo task.
@@ -27,7 +27,7 @@ public class AddTodoCommand extends Command {
             throw new IOException(" Todo description cannot be empty.");
         }
         tasks.add(new Todo(description, false));
-        ui.printMessage(" Got it. I've added this task:\n   " + tasks.getLastTask() +
-                "\n Now you have " + tasks.size() + " tasks in the list.");
+        ui.printMessage(" Got it. I've added this task:\n   " + tasks.getLastTask()
+                + "\n Now you have " + tasks.size() + " tasks in the list.");
     }
 }

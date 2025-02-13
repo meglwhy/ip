@@ -69,4 +69,5 @@ public class Ui {
             System.out.println("DEBUG: No input available. Exiting.");
             return "bye";
         }
-    }}
+    }
+}

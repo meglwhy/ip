@@ -1,9 +1,9 @@
 package task;
 
-import storage.Storage;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import storage.Storage;
 
 /**
  * Represents a list of tasks.

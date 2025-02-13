@@ -39,11 +39,18 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime.format(OUTPUT_FORMAT) + " to: " + endTime.format(OUTPUT_FORMAT) + ")";
+        return "[E]"
+                + super.toString()
+                + " (from: " + startTime.format(OUTPUT_FORMAT)
+                + " to: " + endTime.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + startTime.format(INPUT_FORMAT) + " | " + endTime.format(INPUT_FORMAT);
+        return "E | "
+                + (isDone ? "1" : "0")
+                + " | " + description
+                + " | " + startTime.format(INPUT_FORMAT)
+                + " | " + endTime.format(INPUT_FORMAT);
     }
 }

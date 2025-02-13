@@ -1,11 +1,11 @@
 package commands;
 
+import java.io.IOException;
+
 import storage.Storage;
 import task.Event;
 import task.TaskList;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to add an Event task.
@@ -37,8 +37,8 @@ public class AddEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             tasks.add(new Event(description, from, to));
-            ui.printMessage(" Got it. I've added this task:\n   " + tasks.getLastTask() +
-                    "\n Now you have " + tasks.size() + " tasks in the list.");
+            ui.printMessage(" Got it. I've added this task:\n   " + tasks.getLastTask()
+                    + "\n Now you have " + tasks.size() + " tasks in the list.");
         } catch (IllegalArgumentException e) {
             ui.printError(" Invalid date format :( - Try using yyyy-MM-dd HHmm.");
         }

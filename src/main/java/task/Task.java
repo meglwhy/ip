@@ -8,11 +8,11 @@ import java.time.format.DateTimeParseException;
  * Represents a generic task with a description and completion status.
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
-
     public static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     public static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Constructs a new Task.

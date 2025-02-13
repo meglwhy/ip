@@ -1,11 +1,11 @@
 package commands;
 
+import java.io.IOException;
+
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to delete a task.
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             throw new IOException(" Task number out of range..");
         }
         Task removedTask = tasks.delete(taskIndex);
-        ui.printMessage(" Noted. I've removed this task:\n   " + removedTask +
-                "\n Now you have " + tasks.size() + " tasks in the list.");
+        ui.printMessage(" Noted. I've removed this task:\n   "
+                + removedTask + "\n Now you have " + tasks.size() + " tasks in the list.");
     }
 }
