@@ -53,6 +53,15 @@ public class Koji {
     }
 
     /**
+     * Generates a response for the user's chat message.
+     * @param input The user's message.
+     * @return Koji's response.
+     */
+    public String getResponse(String input) {
+        return "Koji heard: " + input;
+    }
+
+    /**
      * Main method that starts Koji.
      * @param args Command-line arguments (not used).
      */
