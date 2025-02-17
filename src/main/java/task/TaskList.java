@@ -36,6 +36,24 @@ public class TaskList {
     }
 
     /**
+     * Retrieves the task at the specified index.
+     * @param index The index of the task to retrieve.
+     * @return The Task at the given index.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public Task get(int index) {
+        return tasks.get(index);
+    }
+
+    /**
+     * Returns the current list of tasks.
+     * @return The ArrayList of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
      * Returns the number of tasks in the list.
      * @return The number of tasks.
      */

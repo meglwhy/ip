@@ -59,6 +59,14 @@ public abstract class Task {
     }
 
     /**
+     * Sets the task description.
+     * @param description The new description for the task.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Returns a string representation of the task.
      * @return The formatted task string.
      */

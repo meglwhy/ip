@@ -2,14 +2,7 @@ package parser;
 
 import java.io.IOException;
 
-import commands.Command;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.AddTodoCommand;
-import commands.FindCommand;
-import commands.DeleteCommand;
-import commands.AddEventCommand;
-import commands.AddDeadlineCommand;
+import commands.*;
 
 /**
  * Parses user input and returns the corresponding Command object.
@@ -36,6 +29,8 @@ public class Parser {
             return new AddDeadlineCommand(input);
         } else if (input.startsWith("event")) {
             return new AddEventCommand(input);
+        } else if (input.startsWith("edit")) {
+            return new EditCommand(input);
         } else {
             throw new IOException("Unknown command.");
         }
