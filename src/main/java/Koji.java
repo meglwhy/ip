@@ -58,6 +58,7 @@ public class Koji {
      * @return Koji's response.
      */
     public String getResponse(String input) {
+        assert input != null : "Input should not be null";
         return "Koji heard: " + input;
     }
 
