@@ -30,6 +30,7 @@ public class TaskList {
      * @throws IOException If an error occurs while saving tasks.
      */
     public void add(Task task) throws IOException {
+        assert task != null : "Cannot add a null task";
         tasks.add(task);
         storage.save(tasks);
     }
@@ -81,9 +82,13 @@ public class TaskList {
      * @return A list of tasks that contain the keyword.
      */
     public ArrayList<Task> findTasks(String keyword) {
-        assert keyword != null : "Keyword cannot be null";
-        return tasks.stream()
-                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
-                .collect(Collectors.toCollection(ArrayList::new));
+        assert keyword != null && !keyword.trim().isEmpty() : "Keyword must not be null or empty";
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 }
