@@ -81,6 +81,7 @@ public class TaskList {
      * @return A list of tasks that contain the keyword.
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert keyword != null : "Keyword cannot be null";
         return tasks.stream()
                 .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
