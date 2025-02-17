@@ -2,6 +2,7 @@ package task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import storage.Storage;
 
@@ -80,12 +81,9 @@ public class TaskList {
      * @return A list of tasks that contain the keyword.
      */
     public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
-                filteredTasks.add(task);
-            }
-        }
-        return filteredTasks;
+        assert keyword != null : "Keyword cannot be null";
+        return tasks.stream()
+                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
