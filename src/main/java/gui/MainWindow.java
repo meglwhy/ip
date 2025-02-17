@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
- * The controller for the main GUI window of the Vegetables application.
+ * The controller for the main GUI window of the Koji application.
  * <p>
  * This class manages user interactions, displaying dialog boxes for both user input
  * and system responses. It extends {@link ScrollPane} and contains an interactive
