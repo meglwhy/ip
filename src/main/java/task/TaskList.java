@@ -83,12 +83,8 @@ public class TaskList {
      */
     public ArrayList<Task> findTasks(String keyword) {
         assert keyword != null && !keyword.trim().isEmpty() : "Keyword must not be null or empty";
-        ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
-                filteredTasks.add(task);
-            }
-        }
-        return filteredTasks;
+        return tasks.stream()
+                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
