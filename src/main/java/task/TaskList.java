@@ -46,6 +46,36 @@ public class TaskList {
     }
 
     /**
+     * Marks a task as done.
+     * @param index The index of the task (1-based index).
+     * @return The updated task.
+     * @throws IndexOutOfBoundsException If the index is out of range.
+     */
+    public Task markTask(int index) {
+        if (index < 1 || index > tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task number!");
+        }
+        Task task = tasks.get(index - 1);
+        task.markAsDone();
+        return task;
+    }
+
+    /**
+     * Marks a task as not done.
+     * @param index The index of the task (1-based index).
+     * @return The updated task.
+     * @throws IndexOutOfBoundsException If the index is out of range.
+     */
+    public Task unmarkTask(int index) {
+        if (index < 1 || index > tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task number!");
+        }
+        Task task = tasks.get(index - 1);
+        task.markAsNotDone();
+        return task;
+    }
+
+    /**
      * Returns the current list of tasks.
      * @return The ArrayList of tasks.
      */

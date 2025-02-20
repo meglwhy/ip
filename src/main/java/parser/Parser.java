@@ -31,6 +31,10 @@ public class Parser {
             return new AddEventCommand(input);
         } else if (input.startsWith("edit")) {
             return new EditCommand(input);
+        } else if (input.startsWith("mark")) {
+            return new MarkCommand(input);
+        } else if (input.startsWith("unmark")) {
+            return new UnmarkCommand(input);
         } else {
             throw new IOException("Unknown command.");
         }

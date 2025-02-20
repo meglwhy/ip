@@ -1,7 +1,6 @@
 package gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,9 +24,6 @@ public class MainWindow extends ScrollPane {
     @FXML
     private TextField userInput;
 
-    @FXML
-    private Button sendButton;
-
     private KojiGui kojiGui;
     private final Image userImage = new Image(getClass().getResourceAsStream("/images/User.png"));
     private final Image kojiImage = new Image(getClass().getResourceAsStream("/images/Koji.png"));
@@ -46,8 +42,8 @@ public class MainWindow extends ScrollPane {
      */
     @FXML
     public void initialize() {
-//        dialogContainer.setMaxWidth(385);
         dialogContainer.setStyle("-fx-background-color: lavenderblush");
+        dialogContainer.minHeightProperty().bind(scrollPane.heightProperty());
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getKojiDialog("Welcome to Koji! How can I help you today?", kojiImage));
     }
