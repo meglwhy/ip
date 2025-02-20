@@ -46,7 +46,10 @@ public class MainWindow extends ScrollPane {
      */
     @FXML
     public void initialize() {
+//        dialogContainer.setMaxWidth(385);
+        dialogContainer.setStyle("-fx-background-color: lavenderblush");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getKojiDialog("Welcome to Koji! How can I help you today?", kojiImage));
     }
 
     @FXML

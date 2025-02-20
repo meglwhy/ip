@@ -3,15 +3,15 @@ package gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import java.io.IOException;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import java.util.Collections;
 
 /**
@@ -26,32 +26,26 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Private constructor that initializes the DialogBox by loading the FXML layout.
-     * After loading, it sets the provided text and image.
-     *
-     * @param text The message text.
+     * Private constructor that initializes the DialogBox by creating the Label and ImageView.
+     * @param text The dialog text.
      * @param img  The image representing the speaker.
      */
     private DialogBox(String text, Image img) {
-        loadFXML();
-        dialog.setText(text);
-        displayPicture.setImage(img);
-    }
+        dialog = new Label(text);
+        dialog.setWrapText(true);
+        dialog.setStyle("-fx-background-color: lightpink; -fx-padding: 10; -fx-background-radius: 10;");
 
-    /**
-     * Loads the FXML layout for the dialog box and sets this object as both
-     * the root and the controller.
-     */
-    private void loadFXML() {
-        //Increased code quality
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
-        fxmlLoader.setController(this);
-        fxmlLoader.setRoot(this);
-        try {
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        displayPicture = new ImageView(img);
+        displayPicture.setFitWidth(100.0);
+        displayPicture.setFitHeight(100.0);
+        Circle clip = new Circle(50, 50, 50);
+        displayPicture.setClip(clip);
+
+        // Add horizontal margin between the text and the image.
+        HBox.setMargin(dialog, new Insets(5, 10, 5, 10));
+
+        // Set a bottom margin for this dialog box when added to a VBox.
+        VBox.setMargin(this, new Insets(0, 0, 5, 0));
     }
 
     /**
@@ -67,26 +61,28 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a dialog box for the user's message.
-     * The dialog box displays text on the left and the user's image on the right.
-     *
+     * The user's dialog box displays text on the left and the user's image on the right.
      * @param text The user's message.
      * @param img  The user's avatar image.
      * @return A DialogBox instance representing the user's message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.getChildren().addAll(db.dialog, db.displayPicture);
+        db.setAlignment(Pos.TOP_RIGHT);
+        return db;
     }
 
     /**
      * Creates a dialog box for the system (Koji) message.
-     * The dialog box is flipped so that the system's image appears on the left and the text on the right.
-     *
+     * The system's dialog box is flipped so that the image appears on the left and the text on the right.
      * @param text The system's message.
      * @param img  The system's avatar image.
      * @return A DialogBox instance representing the system's message.
      */
     public static DialogBox getKojiDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.getChildren().addAll(db.dialog, db.displayPicture);
         db.flip();
         return db;
     }
