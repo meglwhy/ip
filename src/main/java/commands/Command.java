@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage The Storage handling file operations.
      * @throws IOException If an error occurs during execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
     /**
      * Indicates whether the command should terminate the chatbot.

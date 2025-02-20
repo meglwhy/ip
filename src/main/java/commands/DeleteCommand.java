@@ -31,12 +31,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new IOException(" Task number out of range..");
         }
         Task removedTask = tasks.delete(taskIndex);
-        ui.printMessage(" Noted. I've removed this task:\n   "
-                + removedTask + "\n Now you have " + tasks.size() + " tasks in the list.");
+        return " Noted. I've removed this task:\n   "
+                + removedTask + "\n Now you have " + tasks.size() + " tasks in the list.";
     }
 }

@@ -32,13 +32,13 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             tasks.add(new Deadline(description, by));
-            ui.printMessage(" Got it. I've added this task:\n   " + tasks.getLastTask()
-                    + "\n Now you have " + tasks.size() + " tasks in the list.");
+            return " Got it. I've added this task:\n   " + tasks.getLastTask()
+                    + "\n Now you have " + tasks.size() + " tasks in the list.";
         } catch (IllegalArgumentException e) {
-            ui.printError(" Invalid date format :( - Try using yyyy-MM-dd HHmm.");
+            throw new IOException(" Invalid date format :( - Try using yyyy-MM-dd HHmm.");
         }
     }
 }

@@ -1,5 +1,5 @@
 T | 0 | study lac4202
 E | 0 | study sesh | 2019-02-01 0000 | 2020-12-12 1800
 D | 0 | hw | 2025-03-02 1900
-T | 0 | lol
+T | 0 | lelelele
 T | 0 | return books

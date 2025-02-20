@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,8 +16,17 @@ import javafx.scene.layout.VBox;
  * </p>
  */
 public class MainWindow extends ScrollPane {
-    @FXML private VBox dialogContainer;
-    @FXML private TextField userInput;
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox dialogContainer;
+
+    @FXML
+    private TextField userInput;
+
+    @FXML
+    private Button sendButton;
 
     private KojiGui kojiGui;
     private final Image userImage = new Image(getClass().getResourceAsStream("/images/User.png"));
@@ -29,6 +39,14 @@ public class MainWindow extends ScrollPane {
      */
     public void setKojiGui(KojiGui kojiGui) {
         this.kojiGui = kojiGui;
+    }
+
+    /**
+     * Initializes the GUI components.
+     */
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     @FXML

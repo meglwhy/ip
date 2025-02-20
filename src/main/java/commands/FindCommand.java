@@ -28,16 +28,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> filteredTasks = tasks.findTasks(keyword);
 
         if (filteredTasks.isEmpty()) {
-            ui.printMessage(" No matching tasks found.");
+            return " No matching tasks found.";
         } else {
-            ui.printMessage(" Here are the matching tasks in your list:");
+            StringBuilder response = new StringBuilder(" Here are the matching tasks in your list:");
             for (int i = 0; i < filteredTasks.size(); i++) {
-                ui.printMessage(" " + (i + 1) + ". " + filteredTasks.get(i));
+                response.append("\n ").append(i + 1).append(". ").append(filteredTasks.get(i));
             }
+            return response.toString();
         }
     }
 }
