@@ -16,7 +16,7 @@ deadline return book /by 2023-12-31 1800
 **Expected output:**
 
 Got it. I've added this task:
- [D][ ] return book (by: Dec 31 2023, 6:00 PM) 
+  [D][ ] return book (by: Dec 31 2023, 6:00 PM) 
 Now you have X tasks in the list.
 
 ## Adding Todo
