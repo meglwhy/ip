@@ -24,10 +24,10 @@ public class AddTodoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (description.isEmpty()) {
-            throw new IOException(" Todo description cannot be empty.");
+            throw new IOException("Todo description cannot be empty.");
         }
         tasks.add(new Todo(description, false));
-        return " Got it. I've added this task:\n   " + tasks.getLastTask()
-                + "\n Now you have " + tasks.size() + " tasks in the list.";
+        return "Got it. I've added this task:\n   " + tasks.getLastTask()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

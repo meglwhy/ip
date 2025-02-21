@@ -17,7 +17,7 @@ public class ListCommand extends Command {
         if (tasks.getTasks().isEmpty()) {
             return "There are no tasks in this list.";
         } else {
-                StringBuilder response = new StringBuilder(" Here are the tasks in your list:");
+                StringBuilder response = new StringBuilder("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     // Retrieve each task using tasks.get(i) and append it
                     Task task = tasks.get(i);

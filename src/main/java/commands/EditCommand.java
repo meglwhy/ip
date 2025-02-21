@@ -48,7 +48,7 @@ public class EditCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new IOException(" Task number out of range.");
+            throw new IOException("Task number out of range.");
         }
         // Retrieve the task to be updated. Ensure TaskList provides a getter (e.g., get(int index)).
         Task task = tasks.get(taskIndex);
@@ -56,6 +56,6 @@ public class EditCommand extends Command {
         task.setDescription(newDescription);
         // Save the updated task list.
         storage.save(tasks.getTasks());
-        return " Task edited: " + task;
+        return "Task edited: " + task;
     }
 }

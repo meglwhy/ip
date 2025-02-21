@@ -21,12 +21,12 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String input) throws IOException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {
-            throw new IOException(" Delete what?? Task number required.");
+            throw new IOException("Delete what?? Task number required.");
         }
         try {
             this.taskIndex = Integer.parseInt(parts[1]) - 1; // Convert 1-based index to 0-based
         } catch (NumberFormatException e) {
-            throw new IOException(" Task number must be an integer!!");
+            throw new IOException("Task number must be an integer!!");
         }
     }
 
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             throw new IOException(" Task number out of range..");
         }
         Task removedTask = tasks.delete(taskIndex);
-        return " Noted. I've removed this task:\n   "
-                + removedTask + "\n Now you have " + tasks.size() + " tasks in the list.";
+        return "Noted. I've removed this task:\n   "
+                + removedTask + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }
