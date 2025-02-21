@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -35,7 +34,6 @@ public class DialogBox extends HBox {
         dialog = new Label(text);
         dialog.setWrapText(true);
         dialog.maxWidthProperty().bind(this.widthProperty().subtract(120));
-//        dialog.setTextOverrun(OverrunStyle.CLIP);
 
         dialog.setStyle("-fx-background-color: lightpink; -fx-padding: 10; -fx-background-radius: 10;");
 

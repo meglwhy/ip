@@ -1,9 +1,11 @@
 package commands;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import storage.Storage;
 import task.Event;
+import task.Task;
 import task.TaskList;
 import ui.Ui;
 
@@ -35,6 +37,14 @@ public class AddEventCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        LocalDateTime start = Task.parseDate(from);
+        LocalDateTime end = Task.parseDate(to);
+        if (start == null || end == null) {
+            throw new IOException("Invalid date format :( - Try using yyyy-MM-dd HHmm.");
+        }
+        if (start.isAfter(end)) {
+            throw new IOException("Start date must be before end date.");
+        }
         try {
             tasks.add(new Event(description, from, to));
             return " Got it. I've added this task:\n   " + tasks.getLastTask() +
