@@ -19,7 +19,7 @@ public class DeadlineTest {
         String output = deadline.toString();
 
         // Update the expected substring to match the actual output format.
-        String expectedSubstring = "(by: Mar 02 2025, 7:00 pm)"; // Adjust based on actual OUTPUT_FORMAT
+        String expectedSubstring = "(by: Mar 02 2025, 7:00 pm)"; // Fixed to correct output format
 
         // Assert that the output contains the expected formatted date.
         assertTrue(output.contains(expectedSubstring),
