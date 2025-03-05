@@ -12,7 +12,7 @@ repositories {
 
 javafx {
     version = "17.0.14"
-    sdk = file("/Library/Java/JavaFX/javafx-sdk-17.0.14")
+//    sdk = file("/Library/Java/JavaFX/javafx-sdk-17.0.14")
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
 }
 
