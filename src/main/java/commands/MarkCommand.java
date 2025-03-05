@@ -36,8 +36,15 @@ public class MarkCommand extends Command {
         if (taskIndex < 1 || taskIndex > tasks.size()) {
             throw new IOException("Task number out of range.");
         }
+
+        // Check if the task is already marked
+        Task task = tasks.get(taskIndex - 1); // Assuming getTask returns the task at 1-based index
+        if (task.getStatusIcon().equals("X")) {
+            throw new IOException("Task is already marked as done.");
+        }
+
         // TaskList.markTask expects a 1-based index and subtracts 1 when accessing the list.
-        Task task = tasks.markTask(taskIndex);
+        task = tasks.markTask(taskIndex);
         storage.save(tasks.getTasks());
         return "Nice! I've marked this task as done:\n  " + task +
                 "\nNow you have " + tasks.size() + " tasks in the list.";
