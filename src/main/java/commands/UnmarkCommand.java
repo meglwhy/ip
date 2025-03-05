@@ -18,6 +18,12 @@ public class UnmarkCommand extends Command {
         if (parts.length < 2) {
             throw new IOException("Missing task number. Expected: unmark <task-number>");
         }
+
+        // Check if the command is "unmark"
+        if ("unmark".equalsIgnoreCase(parts[0])) {
+            throw new IOException("The method is not done yet.");
+        }
+
         try {
             // Use 1-based indexing here as well.
             this.taskIndex = Integer.parseInt(parts[1]);
