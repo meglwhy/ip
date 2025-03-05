@@ -37,10 +37,13 @@ public class Storage {
         try {
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
-                file.createNewFile();
+                boolean isFileCreated = file.createNewFile();
+                if (!isFileCreated) {
+                    System.out.println("Warning: File already exists or could not be created.");
+                }
             }
         } catch (IOException e) {
-            System.out.println("Error creating file");
+            System.out.println("Error creating file: " + e.getMessage());
         }
     }
 
