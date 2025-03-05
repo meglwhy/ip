@@ -13,20 +13,19 @@ public class DeadlineTest {
     @Test
     public void testDeadlineToString() {
         // Create a Deadline with the expected input format.
-        // For example, if your production code expects a date string in "yyyy-MM-dd HHmm" format:
-        Deadline deadline = new Deadline("hw", "2025-03-02 1900");
+        Deadline deadline = new Deadline("hw", "2025-03-02 1900", false);
 
         // Call toString() and capture its output.
         String output = deadline.toString();
 
-        // For your sample output, we expect the string to contain the following substring.
-        // (Adjust the expected substring exactly to match your production output.)
-        String expectedSubstring = "(by: Mar 02 2025, 7:00 pm)";
+        // Update the expected substring to match the actual output format.
+        String expectedSubstring = "(by: Mar 02 2025, 7:00 pm)"; // Adjust based on actual OUTPUT_FORMAT
 
         // Assert that the output contains the expected formatted date.
         assertTrue(output.contains(expectedSubstring),
                 "Deadline toString() should contain the formatted deadline date: " + expectedSubstring);
     }
+
 
     @Test
     public void testDeadlineToFileString() {
