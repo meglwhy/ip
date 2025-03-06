@@ -19,11 +19,6 @@ public class UnmarkCommand extends Command {
             throw new IOException("Missing task number. Expected: unmark <task-number>");
         }
 
-        // Check if the command is "unmark"
-        if ("unmark".equalsIgnoreCase(parts[0])) {
-            throw new IOException("The method is not done yet.");
-        }
-
         try {
             // Use 1-based indexing here as well.
             this.taskIndex = Integer.parseInt(parts[1]);
@@ -37,7 +32,13 @@ public class UnmarkCommand extends Command {
         if (taskIndex < 1 || taskIndex > tasks.size()) {
             throw new IOException("Task number out of range.");
         }
-        Task task = tasks.unmarkTask(taskIndex);
+
+        Task task = tasks.get(taskIndex - 1);
+        if (task.getStatusIcon().equals(" ")) {
+            throw new IOException("Task is not done yet.");
+        }
+
+        task = tasks.unmarkTask(taskIndex);
         storage.save(tasks.getTasks());
         return "OK, I've marked this task as not done yet:\n  " + task +
                 "\nNow you have " + tasks.size() + " tasks in the list.";
